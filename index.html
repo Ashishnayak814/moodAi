@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoodAI – Real-Time Emotion Detection</title>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="min-h-screen">
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand-row">
+        <div class="brand-icon">😊</div>
+        <div>
+          <div class="brand-title">MoodAI</div>
+          <div class="brand-subtitle">Live Face & Emotion Detection</div>
+        </div>
+      </div>
+      <div class="status-row">
+        <div class="status-pill">
+          <span id="status-dot" class="status-dot"></span>
+          <span id="status-text">IDLE</span>
+        </div>
+        <span id="model-badge" class="badge-active">AI MODEL ACTIVE</span>
+      </div>
+    </header>
+
+    <main class="content-grid">
+      <section class="video-column">
+        <div class="panel-header">
+          <div>
+            <h2>Live Feed</h2>
+            <p>Webcam stream with real-time face tracking</p>
+          </div>
+          <div class="status-chip">
+            <span class="status-label">Faces</span>
+            <strong id="face-count">0</strong>
+          </div>
+          <div class="status-chip">
+            <span class="status-label">FPS</span>
+            <strong id="fps-counter">0</strong>
+          </div>
+        </div>
+
+        <div class="video-card neon-card">
+          <div class="video-label">
+            Emotion: <span id="video-emotion-label">—</span>
+          </div>
+          <div class="video-frame">
+            <video id="webcam" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            <div id="cam-placeholder" class="cam-placeholder">
+              <div class="spinner"></div>
+              <div class="placeholder-copy">
+                <p>Camera is offline</p>
+                <span>Press START CAMERA to begin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-actions">
+          <button id="btn-start" class="btn btn-start">Start Camera</button>
+          <button id="btn-stop" class="btn btn-stop" disabled>Stop</button>
+        </div>
+      </section>
+
+      <aside class="analytics-column">
+        <div class="panel-title">
+          <h2>Analytics Panel</h2>
+        </div>
+
+        <div class="glass-card live-card">
+          <div class="card-top">
+            <span>Live Analysis</span>
+            <div class="live-dot"></div>
+          </div>
+          <div class="emotion-summary">
+            <div class="emotion-label-title">Current Emotion</div>
+            <div class="emotion-main">
+              <span id="emotion-label">—</span>
+              <span id="emotion-emoji">🔍</span>
+            </div>
+          </div>
+          <p id="no-face-msg" class="no-face-msg">No face detected – position your face in the camera frame.</p>
+          <div class="confidence-row">
+            <span>Confidence Score</span>
+            <strong id="confidence-pct">0%</strong>
+          </div>
+          <div class="bar-track h-3">
+            <div id="confidence-bar" class="bar-fill bar-fill-blue h-full" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="glass-card breakdown-card">
+          <div class="card-top">
+            <span>Emotion Breakdown</span>
+          </div>
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-neutral">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-neutral" class="breakdown-bar bar-fill-slate" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Neutral</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-happy">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-happy" class="breakdown-bar bar-fill-green" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Happy</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-surprised">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-surprised" class="breakdown-bar bar-fill-yellow" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Surprised</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-sad">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-sad" class="breakdown-bar bar-fill-blue" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Sad</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-angry">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-angry" class="breakdown-bar bar-fill-red" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Angry</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-fear">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-fear" class="breakdown-bar bar-fill-orange" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Fear</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-value" id="pct-disgust">0%</div>
+              <div class="breakdown-bar-wrap">
+                <div id="bar-disgust" class="breakdown-bar bar-fill-purple" style="height:0%"></div>
+              </div>
+              <div class="breakdown-label">Disgust</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="app-footer">
+      Powered by Custom ML Model • MoodAI v1.0
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
