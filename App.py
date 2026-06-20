@@ -147,10 +147,9 @@ def predict():
 
     return jsonify({"success": True, "faces": results})
 
-
-# ── Entry point ───────────────────────────────────────────────────────────────
+# ── Entry point ─────────────────────────────────────────────────────────────[...]
 if __name__ == "__main__":
     load_model()
-    # threaded=True lets Flask handle multiple requests concurrently
-    # This is the KEY backend fix for real-time performance
-    app.run(host="0.0.0.0", port=8000, debug=False, threaded=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port, debug=False, threaded=True)
+# ── Entry point ───────────────────────────────────────────────────────────────
